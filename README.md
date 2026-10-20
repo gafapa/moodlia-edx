@@ -2,7 +2,19 @@
 
 MoodlIA edX Converter is a static web application that turns an Open edX course export (OLX) into a Moodle course backup (`.mbz`). Archive extraction, OLX parsing, conversion, and backup generation run entirely in the browser: no course content is uploaded or sent to a server.
 
-## What it converts
+[Status](#status) · [Getting started](#getting-started) · [Usage](#usage) · [Development](#development) · [Security and privacy](#security-and-privacy) · [Documentation](#documentation) · [License](#license)
+
+## Status
+
+Implemented browser-only OLX-to-Moodle converter. The current UI is Spanish. Conversion diagnostics and a test restore are required before using the resulting course.
+
+## Getting started
+
+Run `npm ci` and `npm run dev`, open the local URL printed by Vite, and select an Open edX course export. Review diagnostics before restoring the downloaded `.mbz` into a test Moodle course.
+
+## Usage
+
+### What it converts
 
 The converter reads a `.tar.gz`, `.tgz`, or `.zip` OLX export and builds a Moodle course with one section per chapter, following the chapter → sequential → vertical structure of the source course.
 
@@ -18,6 +30,12 @@ Questions are grouped into quizzes per sequential (default), per chapter, or per
 
 The generated `.mbz` targets current Moodle releases and should be restored into a test course first. Restore it through Moodle's standard course restore; the converter does not talk to Moodle.
 
+### Limitations
+
+- Problem types outside the list above, graded discussions, LTI blocks, and custom XBlocks are skipped with a warning.
+- Video blocks keep the source reference; media files hosted outside the export are not downloaded.
+- The user interface is currently in Spanish.
+
 ## Development
 
 ```text
@@ -30,13 +48,23 @@ npm run build      # production build in dist/
 
 The application is built with React, Vite, and TypeScript. It has no backend and no runtime configuration.
 
-## Limitations
+## Security and privacy
 
-- Problem types outside the list above, graded discussions, LTI blocks, and custom XBlocks are skipped with a warning.
-- Video blocks keep the source reference; media files hosted outside the export are not downloaded.
-- The user interface is currently in Spanish.
+Course archives are processed in the browser. The converter does not upload course content, connect to Moodle, or require an AI provider. Review the downloaded backup and diagnostics before sharing them.
 
-## Project links
+## Documentation
+
+- [Project Pages](https://gafapa.github.io/moodlia-edx/)
+
+Build the repository documentation portal with `python tools/build-project-page.py`. Its status comes from this README; purpose and first steps are maintained in `docs/project-page.json`. The `pages.yml` workflow publishes the portal without deploying the application or changing `moodlia.com`.
+
+Convert Open edX course exports; [Backup Converter](https://github.com/gafapa/moodlia-backup-converter) adapts existing Moodle backups.
+
+- [Source code](https://github.com/gafapa/moodlia-edx)
+- [Issue tracker](https://github.com/gafapa/moodlia-edx/issues)
+- [MoodlIA website](https://moodlia.com)
+
+### Project links
 
 - Source code: https://github.com/gafapa/moodlia-edx
 - Issue tracker: https://github.com/gafapa/moodlia-edx/issues
