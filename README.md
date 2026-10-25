@@ -44,7 +44,13 @@ npm run dev        # local development server
 npm run typecheck  # TypeScript checks
 npm test           # unit tests (vitest)
 npm run build      # production build in dist/
+npm audit --audit-level=moderate
 ```
+
+The 2026-10-25 development-tool security refresh locks Vite 8.3.5, Vitest
+and its mocker 5.0.5, and `source-map-js` 1.2.2. The complete npm audit reports
+zero known vulnerabilities. CI runs TypeScript checks, tests, the production
+build and a moderate-or-higher dependency audit. The conversion runtime is unchanged.
 
 The application is built with React, Vite, and TypeScript. It has no backend and no runtime configuration.
 
